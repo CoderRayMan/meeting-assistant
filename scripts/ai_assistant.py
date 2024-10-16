@@ -25,14 +25,17 @@ class Ai_Helper:
             # See https://ai.google.dev/gemini-api/docs/safety-settings
             system_instruction=BASE_PROMPT
         )
-        self.history = []
-        self.chat_session = self.model.start_chat(history=self.history)
+        self.chat_session = self.model.start_chat(history=[], enable_automatic_function_calling=True)
 
     def update_convo(self, msg_queue):
-        self.history = [{'role': 'user',
-                         'parts': [CONVO_WRAPPER.format(convo=f"""{json.dumps(msg_queue)}""")]
-                         }]
-        self.chat_session = self.model.start_chat(history=self.history)
+        if len(self.chat_session.history) == 0:
+            self.chat_session.history = [{'role': 'user',
+                                          'parts': [CONVO_WRAPPER.format(convo=f"""{json.dumps(msg_queue)}""")]
+                                          }]
+        else:
+            self.chat_session.history[0] = {'role': 'user',
+                                            'parts': [CONVO_WRAPPER.format(convo=f"""{json.dumps(msg_queue)}""")]
+                                            }
 
     def ask_q(self, q):
         return self.chat_session.send_message(q).text

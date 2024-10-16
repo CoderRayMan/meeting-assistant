@@ -3,6 +3,7 @@ import tkinter as tk
 import socket
 import threading
 from ai_assistant import Ai_Helper
+from datetime import datetime
 
 ai_helper = Ai_Helper()
 window = tk.Tk()
@@ -121,13 +122,11 @@ def receive_message_from_server(sck, m):
             leftTkDisplay.insert(tk.END, "\n\n" + from_server)
             if ':' in from_server:
                 speaker, transcription = map(str.strip, from_server.split(':'))
-                msg_queue.append({'speaker': speaker, 'spoken_text': transcription})
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                msg_queue.append({'speaker': speaker, 'spoken_text': transcription, 'timestamp': timestamp})
             ai_helper.update_convo(msg_queue)
-
         leftTkDisplay.config(state=tk.DISABLED)
         leftTkDisplay.see(tk.END)
-
-        # print("Server says: " +from_server)
 
     sck.close()
     window.destroy()
@@ -141,14 +140,15 @@ def getChatMessageLeft(msg):
     # why? Apparently, tkinter does not allow use insert into a disabled Text widget :(
     leftTkDisplay.config(state=tk.NORMAL)
     if len(texts) < 1:
-        leftTkDisplay.insert(tk.END, "You : " + msg, "tag_your_message")  # no line
+        leftTkDisplay.insert(tk.END, "You : " + msg, "tag_your_message")
     else:
         leftTkDisplay.insert(tk.END, "\n\n" + "You : " + msg, "tag_your_message")
 
     leftTkDisplay.config(state=tk.DISABLED)
 
     send_mssage_to_server(msg)
-    msg_queue.append({'speaker': 'You', 'spoken_text': msg})
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    msg_queue.append({'speaker': 'You', 'spoken_text': msg, 'timestamp': timestamp})
     ai_helper.update_convo(msg_queue)
     leftTkDisplay.see(tk.END)
     tkMessageLeft.delete('1.0', tk.END)
@@ -158,20 +158,18 @@ def getChatMessageRight(msg):
     msg = msg.replace('\n', '')
     texts = rightTkDisplay.get("1.0", tk.END).strip()
     respo = ai_helper.ask_q(msg)
-    # enable the display area and insert the text and then disable.
-    # why? Apparently, tkinter does not allow use insert into a disabled Text widget :(
+
     rightTkDisplay.config(state=tk.NORMAL)
     if len(texts) < 1:
-        rightTkDisplay.insert(tk.END, "You : " + msg, "tag_your_message")  # no line
-        rightTkDisplay.insert(tk.END, "\n\n" + "helper : " + respo, "tag_your_message")  # no line
+        rightTkDisplay.insert(tk.END, "You : " + msg, "tag_your_message")
+        rightTkDisplay.insert(tk.END, "\n\n" + "helper : " + respo, "tag_your_message")
     else:
         rightTkDisplay.insert(tk.END, "\n\n" + "You : " + msg, "tag_your_message")
         rightTkDisplay.insert(tk.END, "\n\n" + "helper : " + respo, "tag_your_message")
 
     rightTkDisplay.config(state=tk.DISABLED)
-
     rightTkDisplay.see(tk.END)
-    rightTkDisplay.delete('1.0', tk.END)
+    tkMessageRight.delete('1.0', tk.END)
 
 
 def send_mssage_to_server(msg):
