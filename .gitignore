@@ -1,0 +1,7 @@
+*.json
+cache/*.*
+model/*.bin
+pandasai.log
+captured_voice.mp3
+/.idea
+**/__pycache__
