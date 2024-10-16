@@ -6,7 +6,7 @@
 ## Setup:
     - run pip install -r requirements.txt
     - The application uses "Gemini" as LLM so follow thw Gemini config steps to get gemini config ready.
-    - .run folder contains a set of configurations that gets aotu imported in PYCHARM.
+    - .run folder contains a set of configurations that gets auto imported in PYCHARM.
     - the configurations has one server and three clients.
     - add a 'config.json' to the root
 ## Points to consider:
