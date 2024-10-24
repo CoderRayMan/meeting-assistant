@@ -29,13 +29,13 @@ if you are using Mac Machine , then comment lines 'MAC COMMENT START'-'MAC COMME
 run the following command : ipconfig getifaddr en0
 copy the ip address and assign the value to the ip-address
 '''
-local_ip_address = "<YOUR IP HERE>"
+local_ip_address = "192.168.0.106"
 
 ##   MAC COMMENT START
 try:
     local_ip_address = socket.gethostbyname(socket.gethostname())
 except Exception as e:
-    local_ip_address = "<YOUR IP HERE>"
+    local_ip_address = "192.168.0.106"
     pass
 ## MAC COMMENT END
 
@@ -98,14 +98,16 @@ def start_translate():
     if isTranslatioRunning:
         isTranslatioRunning = False
         btn_audio_translate.configure(text="Translate", command=start_translate, style='primary.TButton')
-        reciever.stop_transcriber()
         reciever.stop_translation()
+        reciever.stop_transcriber()
         return
     style.configure('W.TButton',foreground='white',background='red')
     btn_audio_translate.configure(text="Stop Translate", command=start_translate,style='W.TButton')
     isTranslatioRunning = True
     t6 = threading.Thread(target=reciever.start_translate)
     t6.start()
+    t7=threading.Thread(target=reciever.initialize_multi,args=[trans_update])
+    t7.start()
 
 def start_camera_stream():
     client_target = text_target_ip.get()
@@ -210,29 +212,34 @@ middle_frame.grid_columnconfigure(0, weight=7)  # Video stream
 middle_frame.grid_columnconfigure(1, weight=3)
 
 # Top frame
-label_target_ip_add = ttk.Label(top_frame, text="Target IP")
-label_target_ip_add.grid(row=0, column=0)
+label_target_ip_add = ttk.Label(top_frame, text="Target IP:")
+label_target_ip_add.pack(side=tk.LEFT, padx=(10, 5), pady=(10, 0))
 
-text_target_ip = ttk.Entry(top_frame, style='TEntry')
-text_target_ip.grid(row=0, column=1)
+text_target_ip = ttk.Entry(top_frame)
+text_target_ip.pack(side=tk.LEFT, padx=(0, 5), pady=(10, 0))
 
 btn_listen = ttk.Button(top_frame, text="Connect", command=start_listening, style='primary.TButton')
-btn_listen.grid(row=0, column=2)
+btn_listen.pack(side=tk.LEFT, padx=5, pady=(10, 0))
 
-# Create the Label widget in the top frame
-speaker_label = ttk.Label(top_frame, text="Current Speaker")
-speaker_label.grid(row=0, column=3)
+# Subscription label
+label_subscription = ttk.Label(top_frame, text="Subscription:")
+label_subscription.pack(side=tk.LEFT, padx=(10, 5), pady=(10, 0))
 
-# # Create the Text widget in the top frame
-# speaker_output_box = tk.Text(top_frame)
-# speaker_output_box.grid(row=0, column=4)
-# Add this to your imports
-from tkinter import END
+# Dropdown for selecting between Azure and Open Source
+selected_subscription = tk.StringVar(value="Azure")  # Initial value
+subscription_dropdown = ttk.Combobox(top_frame, textvariable=selected_subscription, values=["Open Source", "Azure"])
+subscription_dropdown.pack(side=tk.LEFT, padx=(0, 10), pady=(10, 0))
 
-# Define the update_speaker method
-# def update_speaker(text):
-#     speaker_output_box.insert(END, text + "\n")
-#     speaker_output_box.see(END)
+label_currently_speaking = ttk.Label(top_frame, text="Currently Speaking:")
+label_currently_speaking.pack(side=tk.RIGHT, padx=(10, 500), pady=(10, 0))
+
+def trans_update(text):
+    if(text!="Unknown"):
+        label_currently_speaking.configure(text='Currently Speaking: {}'.format(text))
+
+
+
+
 video_stream_frame = ttk.Frame(left_frame, width=video_stream_width, height=video_stream_height)
 video_stream_frame.pack()
 
@@ -262,9 +269,6 @@ dropdown_listener_language = ttk.Combobox(bottom_frame, textvariable=selected_li
                                           style='TCombobox')
 dropdown_listener_language.bind("<<ComboboxSelected>>", update_src_des)
 dropdown_listener_language.grid(row=0, column=1, padx=5)
-
-# btn_listen = ttk.Button(bottom_frame, text="Start Listening", command=start_listening, style='primary.TButton')
-# btn_listen.grid(row=0, column=5, padx=5)
 
 btn_camera = ttk.Button(bottom_frame, text="Camera", command=start_camera_stream, style='primary.TButton')
 btn_camera.grid(row=0, column=6, padx=5)

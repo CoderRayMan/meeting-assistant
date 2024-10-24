@@ -5,11 +5,11 @@ import socket
 import threading
 from scripts.translatio.azure import lang_dict
 
-local_ip_address = "<YOUR IP HERE>"
+local_ip_address = "192.168.0.105"
 try:
     local_ip_address = socket.gethostbyname(socket.gethostname())
 except Exception as e:
-    local_ip_address = "<YOUR IP HERE>"
+    local_ip_address = "192.168.0.109"
     pass
 audio_client = AudioSender(local_ip_address, 6666)
 
