@@ -1,0 +1,46 @@
+Session Content
+Objective of course
+What will we learn in this course?
+Text books and Reference books
+What is Natural Language Processing? 
+
+
+Objective of course 
+To learn  the fundamental concepts and techniques of natural language processing (NLP) including Language Models, Word Embedding, Part pf speech Tagging, Parsing
+To learn computational properties of natural languages and the commonly used algorithms for processing linguistic information
+To introduce basic mathematical models and methods used in NLP applications to formulate computational solutions.
+To introduce research and development work in Natural language Processing
+
+What will we learn in this course?
+Language Modelling
+N-gram language modeling
+Neural Language Models
+Part-of-Speech Tagging 
+Hidden Markov Model(MM), Maximum Entropy MM
+Topic Modelling
+Vector Semantics
+Parsing
+Encoder-Decoder Models, Attention and Contextual Embedding's 
+Word sense disambiguation
+Semantic web ontology and knowledge Graphs
+
+Text books and Reference books
+T1 : Jurafsky and Martin, SPEECH and LANGUAGE PROCESSING: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition, McGraw Hill
+
+T2 : Manning and Schütze, Foundations of Statistical Natural Language Processing, MIT Press. Cambridge, MA
+
+R1 : Allen James, Natural Language Understanding
+
+R2 : Neural Machine Translation by Philipp Koehn
+
+R3 : Semantic Web Primer (Information Systems) By Antoniou, Grigoris; Van Harmelen, Frank
+
+What is Natural Language Processing?
+
+Natural Language Processing
+
+Process information contained in natural  language text.
+
+Also known as Computational Linguistics (CL),  Human Language Technology (HLT), Natural  Language Engineering (NLE)
+
+ 

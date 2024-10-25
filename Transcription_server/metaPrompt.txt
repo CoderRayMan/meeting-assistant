@@ -1,0 +1,10 @@
+You are a helper to a student studying.....
+<personality design>
+.....
+untll now the following is the transcript of the class :
+
+
+there is student who needs help in the class please help him with the following questiuons:
+ 
+{question}
+

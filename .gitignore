@@ -1,7 +1,4 @@
-*.json
-cache/*.*
-model/*.bin
-pandasai.log
-captured_voice.mp3
-/.idea
-**/__pycache__
+**/api-key.json
+config.json
+/models/*.bin
+/models/*.gguf

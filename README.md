@@ -1,33 +1,36 @@
-# Meeting Assistant Application
-### Authors : Ankshuk Ray , Debarati Bannerjee
-## Major Branches: 
-    - main : this contains the ai assistant code assuming the translation and transcription is done.
-    - dummy_meeting_application : this contains code of a dummy meeting application with transation and trancription ability.
-## Setup:
-    - run pip install -r requirements.txt
-    - The application uses "Gemini" as LLM so follow thw Gemini config steps to get gemini config ready.
-    - .run folder contains a set of configurations that gets auto imported in PYCHARM.
-    - the configurations has one server and three clients.
-    - add a 'config.json' to the root
-## Points to consider:
-    - the application assumes the transcripts are done.
-    - as a part of the application the transcription dummy is created manually by typing the transcription as it would come from the real time transcriber.
-    - in the branch  "-b dummy_meeting_application" a sample code is provided to see how a real-time call can be translated and transcribed.
-## Configuring Gemini :
-    - Open 'https://aistudio.google.com/app/apikey' create a free API key.
-    - Place a variable in the config JSON as "GEMINI_API_KEY".
------
-### config.json
-```json
-{
+# Real-Time Lecture Co-Pilot
 
-"GEMINI_API_KEY":"<Your Google-API key>",
+## Overview
+This flow diagram depicts a process involving user interaction, language processing, and translation services. Below is a breakdown of the main components and their interactions:
 
-"azure_speech_key":"Azure Speech Studio Key (Only to be used for the Dummy Meeting application)",
+## Components
 
-"azure_loc":"Azure location code (Only to be used for the Dummy Meeting application)",
-"gcp_key_loc": ""
+### 1. User Interaction
+- **User - triggers LLM**: Represents the starting point where user interaction initiates the process.
+  - **Action**: User triggers an action related to Language Learning Model (LLM).
 
-} 
-```
+### 2. Language Processing
+- **LLM-service**: A service related to the Language Learning Model.
+- **LLM**: The Language Learning Model itself.
+  - **Action**: Interaction between LLM-service and LLM.
 
+### 3. Translation Services
+- **Translation - Service**: A service for translation functionalities.
+- **Dump DB**: Process of dumping data into a database associated with the Translation Service.
+  - **Action**: Data dumping process.
+
+### 4. Real-time Speech to Text
+- **Real-time Speech to Text**: A component for converting speech to text in real-time.
+
+### 5. Ongoing Class
+- **On-going Class**: Represents a class or ongoing session associated with the process.
+
+### 6. Meta-prompt Schema
+- **1. take user input**: Step involving taking user input.
+- **Meta-prompt Schema**: Schema or structure for handling prompts, possibly related to user input.
+
+## Process Flow
+The process begins with user interaction triggering actions related to language processing and translation. The Language Learning Model (LLM) and Translation Service play key roles in processing and translating data. Additionally, real-time speech-to-text conversion and ongoing class sessions are incorporated into the process. The meta-prompt schema outlines steps for handling user input and prompts.
+
+## Flow Diagram
+![Flow Diagram](arc.png)
