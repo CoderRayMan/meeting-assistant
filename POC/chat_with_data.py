@@ -14,7 +14,7 @@ DB_FAISS_PATH = "POC/vectorstore/db_faiss"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 GEMINI_TOKEN = 'your token'
 TRANSCRIPT_PATH = '../Transcription_server/data/transcript_dump.txt'
-st.set_page_config(page_title="BITS Lecture Assistant Chatbot", page_icon="🎓")
+st.set_page_config(page_title="Meeting Assistant Chatbot", page_icon="🎓")
 
 # Initialize chat history as a list of tuples
 if 'qa_history' not in st.session_state:
