@@ -89,7 +89,7 @@ def handle_input(query, query1):
 
 # Main Streamlit app
 def main():
-    st.title("BITS Lecture Assistant Chatbot 🎓")
+    st.title("Meeting Assistant Chatbot 🎓")
     st.markdown("## Welcome!")
     st.markdown("### I am your lecture assistant chatbot and will answer all your doubts related to this lecture")
     st.markdown("### Please ask anything on today's lecture 🤖")   
@@ -117,7 +117,7 @@ def main():
         st.markdown(f"### 🤖 Answer: {answer}")
 
     # Watermark
-    st.markdown('<div class="watermark">By: Deep Insight Crew<br><span style="font-size: 14px;">Debarati Banerjee</span><br><span style="font-size: 14px;">Mrutyunjay Shukla</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="watermark">By: Deep Insight Crew<br><span style="font-size: 14px;">Debarati Banerjee</span><br><span style="font-size: 14px;">Ankshuk Ray</span></div>', unsafe_allow_html=True)
 
     
 # Run the Streamlit app
